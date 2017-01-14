@@ -6,15 +6,23 @@ class SearchBar extends Component {
     this.state = { term: '' };
   }
 
-  handleInputChange(event) {
-    this.setState({ term: event.target.value });
+  handleInputChange(term) {
+    this.setState({ term: term });
   }
 
   render() {
     return (
-      <div>
-      <input
-        onChange={this.handleInputChange.bind(this)}/>
+      <div className="search-bar">
+        <form className="navbar-form">
+          <div className="form-group">
+            <div className="input-group">
+              <input
+                placeholder="Search"
+                onChange={event => this.handleInputChange(event.target.value)}
+                className="form-control" />
+            </div>
+          </div>
+        </form>
       </div>
     );
   }

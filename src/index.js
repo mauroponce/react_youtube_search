@@ -6,7 +6,7 @@ import SearchBar    from './components/search_bar.js';
 import VideoList    from './components/video_list.js';
 import VideoDetail  from './components/video_detail.js';
 
-const API_KEY = 'AIzaSyDV00w5GyyruQJetd4AY23lMB9WaxQ7Xkw';
+const YOUTUBE_API_KEY = 'AIzaSyDV00w5GyyruQJetd4AY23lMB9WaxQ7Xkw';
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +17,16 @@ class App extends Component {
       selectedVideo: null
     };
 
-    YouTubeSearch({ key: API_KEY, term: 'Snowboard' }, (videos) => {
+    this.searchVideos('Patagonia');
+  }
+
+  handleVideoSelect(selectedVideo) {
+    debugger
+    this.setState({selectedVideo});
+  }
+
+  searchVideos(term){
+    YouTubeSearch({ key: YOUTUBE_API_KEY, term: term }, videos => {
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
@@ -25,18 +34,16 @@ class App extends Component {
     });
   }
 
-  handleVideoSelect(selectedVideo) {
-    this.setState({selectedVideo});
-  }
-
   render() {
     return (
       <div>
-        <SearchBar />
-        <VideoDetail video={this.state.selectedVideo}/>
-        <VideoList
-          onVideoSelect={this.handleVideoSelect.bind(this)}
-          videos={this.state.videos}/>
+        <SearchBar onSearchTermChange={term => this.searchVideos(term)}/>
+        <div className="row">
+          <VideoDetail video={this.state.selectedVideo}/>
+          <VideoList
+            onVideoSelect={selectedVideo => this.handleVideoSelect(selectedVideo)}
+            videos={this.state.videos}/>
+        </div>
       </div>
     );
   }
