@@ -30,3 +30,7 @@
 .video-list .media-body {
   margin-left: 10px;
 }
+
+button {
+  cursor: pointer;
+}
