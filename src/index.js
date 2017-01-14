@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YouTubeSearch from 'youtube-api-search';
@@ -21,7 +22,6 @@ class App extends Component {
   }
 
   handleVideoSelect(selectedVideo) {
-    debugger
     this.setState({selectedVideo});
   }
 

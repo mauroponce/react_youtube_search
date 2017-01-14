@@ -6,23 +6,21 @@ class SearchBar extends Component {
     this.state = { term: '' };
   }
 
-  handleInputChange(term) {
-    this.setState({ term: term });
+  handleKeyPress(event){
+    if(event.key == 'Enter') {
+      let term = event.target.value;
+      this.setState({ term: term });
+      this.props.onSearchTermChange(term);
+    }
   }
 
   render() {
     return (
       <div className="search-bar">
-        <form className="navbar-form">
-          <div className="form-group">
-            <div className="input-group">
-              <input
-                placeholder="Search"
-                onChange={event => this.handleInputChange(event.target.value)}
-                className="form-control" />
-            </div>
-          </div>
-        </form>
+        <input
+          placeholder="Search"
+          onKeyPress={event => this.handleKeyPress(event)}
+          className="form-control" />
       </div>
     );
   }
